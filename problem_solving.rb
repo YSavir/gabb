@@ -1,6 +1,10 @@
 require 'colorize'
 require 'pry'
 require_relative 'gabb'
+require 'thor'
+
+current_session_name = Time.now.to_s
+FileUtils.mkdir('./output/' + current_session_name)
 
 puts "Greetings, WDI Student. Welcome to our bug solving session!".blue
 puts "This exercise will explore a few ruby errors and how to solve them.".blue
@@ -13,6 +17,8 @@ puts "Press Enter to require the code.".blue
 gets.chomp
 
 gabb = nil
+FileUtils.cp('./templates/puts_hi.rb', './exercises')
+File.open('log.txt', 'w') { |f| f.truncate(0) }
 begin
   require_relative 'exercises/puts_hi'
 rescue SyntaxError => error
@@ -27,10 +33,14 @@ rescue SyntaxError => error
 else
   gabb.log_error
   puts "Problem fixed!".blue
-  puts "Can you give me a brief explanation of what you did? Enter 'q' to exit.".blue
-  f = File.open('log.txt', 'a')
-  f.puts "Solution: "
-  f.puts gets.chomp
-  f.close
+  puts "Can you give me a brief explanation of what you did?".blue
+  File.open('log.txt', 'a') do |f|
+    f.puts "Solution: "
+    f.puts gets.chomp
+  end
+  FileUtils.cp('./exercises/puts_hi.rb', ('./output/' + current_session_name))
+  FileUtils.cp('log.txt', ('./output/' + current_session_name))
+  FileUtils.cp('./templates/puts_hi.rb', './exercises')
+  File.open('log.txt', 'w') { |f| f.truncate(0) }
 end
 
