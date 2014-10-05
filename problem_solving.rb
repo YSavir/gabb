@@ -1,5 +1,6 @@
-require_relative 'setup'
-
+require 'colorize'
+require 'pry'
+require_relative 'gabb'
 
 puts "Greetings, WDI Student. Welcome to our bug solving session!".blue
 puts "This exercise will explore a few ruby errors and how to solve them.".blue
