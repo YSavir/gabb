@@ -5,13 +5,6 @@ class Gabb
     find_details
   end
 
-  def log_error
-    File.open('log.txt', 'a') do |f|
-      f.puts "Error time: " + Time.now.to_s + "\n"
-      f.puts "Error: " + @error.to_s + "\n"
-    end
-  end
-
   def find_details
     @error_line = @error.to_s.match(/(\w+):(\d+)/)[2]
     @error_file = @error.to_s.match(/(\w+.\w+):/)[1]

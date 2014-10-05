@@ -1,10 +1,11 @@
 require 'colorize'
 require 'pry'
 require_relative 'gabb'
-require 'thor'
 
 current_session_name = Time.now.to_s
 FileUtils.mkdir('./output/' + current_session_name)
+log_file = './output/' + current_session_name + '/log.txt'
+FileUtils.touch(log_file)
 
 puts "Greetings, WDI Student. Welcome to our bug solving session!".blue
 puts "This exercise will explore a few ruby errors and how to solve them.".blue
@@ -18,7 +19,6 @@ gets.chomp
 
 gabb = nil
 FileUtils.cp('./templates/puts_hi.rb', './exercises')
-File.open('log.txt', 'w') { |f| f.truncate(0) }
 begin
   require_relative 'exercises/puts_hi'
 rescue SyntaxError => error
@@ -31,16 +31,17 @@ rescue SyntaxError => error
   gets.chomp
   retry
 else
-  gabb.log_error
+  File.open(log_file, 'a') do |f|
+    f.puts "Exercise: missing end"
+    f.puts "Error: " + error.to_s
+  end
   puts "Problem fixed!".blue
   puts "Can you give me a brief explanation of what you did?".blue
-  File.open('log.txt', 'a') do |f|
+  File.open(log_file, 'a') do |f|
     f.puts "Solution: "
     f.puts gets.chomp
   end
   FileUtils.cp('./exercises/puts_hi.rb', ('./output/' + current_session_name))
-  FileUtils.cp('log.txt', ('./output/' + current_session_name))
   FileUtils.cp('./templates/puts_hi.rb', './exercises')
-  File.open('log.txt', 'w') { |f| f.truncate(0) }
 end
 

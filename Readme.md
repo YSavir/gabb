@@ -7,15 +7,9 @@ Clone the repo.
 Run problem_solving.rb, then follow instructions.
 
 ### Activity Log
-The errors and your solution descriptions are logged into a file named 'log.txt'.
+Whenever starting a bugfixing session, a folder is created in the `output` folder. In this folder is a `log.txt` file, which tracks the bugs and your solutions. Whenever you fix a bug, a copy of the fixed file will be saved to this folder.
 
 ## To Do
-* Completing a bug fix should do the following:
-  * Copy the fixed file to the `output/` folder
-  * Reset the original file in the `exercises/` folder.
-  * Save the current `log.txt` to the `output/` folder.
-    * Should be timestamped for the current 'session' of bugfixing
-    * If a log for this bugfixing session already exists, should replace it with the updated log.
-* Starting a new session should empty out the `log.txt` file.
+* Improve this horrible code
 * More bug fixing activities.
 * Failing to fix a problem should provide the student with a random tip.
