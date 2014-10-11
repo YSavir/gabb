@@ -27,6 +27,7 @@ module GABB
       rescue error_type => error
         @error = error
         climax(error)
+        wait
         retry
       else
         resolution
