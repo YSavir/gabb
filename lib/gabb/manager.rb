@@ -17,7 +17,7 @@ module GABB
         choice = gets.chomp
         case choice
           when "0" then puts "Exiting General Assembly Buster!".blue
-          when *@exercises.keys then system("clear"); @exercises[choice].new
+          when *@exercises.keys then @exercises[choice].new
         else
           puts "Invalid choice. Please select a different options.".yellow
         end
