@@ -43,11 +43,6 @@ module GABB
       exercises.each_with_index { |exercise, idx| @exercises[(idx + 1).to_s] = exercise.constantize}
     end
 
-    def setup_session
-      log_file = './output/' + current_session_name + '/log.txt'
-      FileUtils.touch(log_file)
-    end
-
     def start_new_session
       create_session(get_session_name)
     end

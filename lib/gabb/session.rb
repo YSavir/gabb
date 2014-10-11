@@ -35,6 +35,7 @@ module GABB
       else
         @name = name
         FileUtils.mkdir(directory_path)
+        FileUtils.touch(directory_path + '/log.txt')
       end
     end
 
