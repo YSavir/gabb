@@ -6,4 +6,4 @@ Bundler.require
 Dir["./lib/gabb/*.rb"].each {|file| require file }
 Dir["./lib/programs/*.rb"].each {|file| require file }
 
-a = GABB::Manager.new
+GABB::Manager.new
