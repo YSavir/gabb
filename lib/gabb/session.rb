@@ -12,6 +12,10 @@ module GABB
       './sessions/' + @name
     end
 
+    def log_file
+      directory_path + '/log.txt'
+    end
+
     def new_or_load
       puts "Would you like to start a new session or load an old session?"
       puts "  0: New"
@@ -37,6 +41,10 @@ module GABB
         FileUtils.mkdir(directory_path)
         FileUtils.touch(directory_path + '/log.txt')
       end
+    end
+
+    def log_program(program_name)
+      File.open(log_file, 'a') {|log| log.puts "Exercise: #{program_name}"}
     end
 
   end
