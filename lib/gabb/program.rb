@@ -1,6 +1,7 @@
 module GABB
 
   class Program
+    include GABB::Commands
 
     ROOT_DIR = '../../'
 
@@ -19,8 +20,10 @@ module GABB
 
     def action
       exposition
+      wait
       begin
         rising_action
+        wait
       rescue error_type => error
         @error = error
         climax(error)
@@ -36,11 +39,6 @@ module GABB
 
     def error_type
       StandardError
-    end
-
-    def wait
-      "Press Enter to proceed.".blue
-      gets.chomp
     end
 
     def find_details
