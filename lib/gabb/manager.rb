@@ -7,6 +7,7 @@ module GABB
 
     def initialize
       # setup_session
+      GABB::Session.new({name: 'boo'})
       prepare_exercises
       puts "Greetings, WDI Student. Welcome to General Assembly Bug Buster!".blue
       choice = nil
@@ -43,10 +44,21 @@ module GABB
     end
 
     def setup_session
-      @current_session_name = Time.now.to_s
-      FileUtils.mkdir('./output/' + current_session_name)
       log_file = './output/' + current_session_name + '/log.txt'
       FileUtils.touch(log_file)
+    end
+
+    def start_new_session
+      create_session(get_session_name)
+    end
+
+    def get_session_name
+      "Session name?"
+      @session_name = gets.strip
+    end
+
+    def create_session
+
     end
 
   end

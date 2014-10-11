@@ -2,15 +2,40 @@ module GABB
 
   class Session
 
-    def initialize(options={})
-      @name = options[:name] || Time.now.to_s
-      if options[:new] then puts 'hi' end
-      @directory = Dir.new("sessions/" + name)
+    def initialize
+      add_session_directory if options[:new]
     end
 
-    def new_session_directory
-      dir_name = './sessions/' + @name
-      FileUtils.mkdir(dir_name) unless Dir.exists?(dir_name)
+    private
+
+    def directory_path
+      './sessions/' + @name
+    end
+
+    def new_or_load
+      puts "Would you like to start a new session or load an old session?"
+      puts "  0: New"
+      puts "  1: Load"
+      choice = gets.strip.downcase
+      case choice
+        when "new" then start_new_session
+        when "load" then load_session
+      else
+        puts "Not a valid choice."
+        new_or_load
+      end
+    end
+
+    def start_new_session
+      p "Enter a name for the session: "
+      name = gets.chomp
+      if Dir.exists?(name)
+        puts "A session with that name already exists."
+        start_new_session
+      else
+        @name = name
+        FileUtils.mkdir(directory_path)
+      end
     end
 
   end
