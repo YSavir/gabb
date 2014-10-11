@@ -9,9 +9,8 @@ class PutsHi < GABB::Program
   end
 
   def exposition
-    puts "\n\nWe're going to start by getting a method that prints 'hi' to the screen.".blue
+    puts "We're going to start by getting a method that prints 'hi' to the screen.".blue
     puts "The code for this method is found in another file. We'll have to require it before we can use the code.".blue
-    wait
   end
 
   def rising_action
@@ -23,8 +22,6 @@ class PutsHi < GABB::Program
     find_details
     validate_details
     puts "Great. Go to that file and fix the issue.".blue
-    puts "Then press Enter.".blue
-    gets.chomp
   end
 
   def resolution
