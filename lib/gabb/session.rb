@@ -1,12 +1,14 @@
 module GABB
 
   class Session
+    private
+
 
     def initialize
       new_or_load
+      prepare_exercises
+      menu
     end
-
-    private
 
     def directory_path
       Dir.pwd + '/sessions/' + @name
@@ -35,6 +37,11 @@ module GABB
       end
     end
 
+    def prepare_exercises
+      @exercises = Hash.new
+      exercises.each_with_index { |exercise, idx| @exercises[(idx + 1).to_s] = exercise.constantize}
+    end
+
     def menu
       choice = nil
       while choice != '0'
@@ -44,7 +51,7 @@ module GABB
         choice = gets.chomp
         case choice
           when "0" then puts "Exiting General Assembly Buster!".blue
-          when *@exercises.keys then @exercises[choice].new
+          when *@exercises.keys then @exercises[choice].new(self)
         else
           puts "Invalid choice. Please select a different options.".yellow
         end
@@ -53,11 +60,6 @@ module GABB
 
     def exercises
       GABB::Exercise.descendants.map(&:to_s)
-    end
-
-    def prepare_exercises
-      @exercises = Hash.new
-      exercises.each_with_index { |exercise, idx| @exercises[(idx + 1).to_s] = exercise.constantize}
     end
 
     def create_new_session
