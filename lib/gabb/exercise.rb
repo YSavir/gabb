@@ -47,7 +47,7 @@ module GABB
     end
 
     def error_type
-      StandardError
+      Exception
     end
 
     def find_details
