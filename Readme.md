@@ -4,12 +4,16 @@ An interactive bug fixing activity for WDI Students
 Clone the repo.
 ## Usage
 ### Starting
-Run problem_solving.rb, then follow instructions.
+Run gabb.rb, then follow instructions.
 
-### Activity Log
-Whenever starting a bugfixing session, a folder is created in the `output` folder. In this folder is a `log.txt` file, which tracks the bugs and your solutions. Whenever you fix a bug, a copy of the fixed file will be saved to this folder.
+### Sessions
+Whenever starting a bugfixing session, a folder is created in the `sessions` folder. This folder will include:
+* Any exercises a student works on.
+* A log with completed exercises and the student's explanation of how s/he completed the exercise.
 
 ## To Do
-* Improve this horrible code
 * More bug fixing activities.
 * Failing to fix a problem should provide the student with a random tip.
+* Sessions should track completed exercises.
+* Sessions should be loadable.
+* Students should be warned before overriding any files.
