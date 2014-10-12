@@ -3,10 +3,8 @@ module GABB
   class Manager
     include GABB::Commands
 
-    ROOT_DIR = '../../'
 
     def initialize
-      # setup_session
       puts "Greetings, WDI Student. Welcome to General Assembly Bug Buster!".blue
       GABB::Session.new
       prepare_exercises

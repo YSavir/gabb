@@ -9,7 +9,7 @@ module GABB
     private
 
     def directory_path
-      './sessions/' + @name
+      Dir.pwd + '/sessions/' + @name
     end
 
     def log_file
@@ -55,6 +55,14 @@ module GABB
       print "Briefly describe how you solved the problem: ".blue
       solution = gets.strip
       File.open(log_file, 'a') { |log| log.puts "Solution: ", solution } 
+    end
+
+    def add_exercise(exercise_name)
+      FileUtils.cp("./lib/exercises/#{exercise_name}", directory_path)
+    end
+
+    def require_exercise(exercise)
+      require_relative(directory_path + exercise)
     end
 
   end

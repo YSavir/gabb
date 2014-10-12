@@ -3,11 +3,9 @@ module GABB
   class Exercise
     include GABB::Commands
 
-    ROOT_DIR = '../../'
-
-    def initialize
+    def initialize(session)
+      @session = session
       action
-      # find_details
     end
 
     def self.title
@@ -23,13 +21,18 @@ module GABB
       wait
       begin
         rising_action
+        binding.pry
+        @session.require_exercise(self.class.underscore)
         wait
       rescue error_type => error
         @error = error
-        climax(error)
+        puts (error.to_s + "\n").colorize(:yellow)
+        climax
         wait
         retry
+        falling_action
       else
+        FileUtils.cp('./templates/puts_hi.rb', './exercises')
         resolution
       end
     end
