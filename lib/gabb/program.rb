@@ -1,6 +1,6 @@
 module GABB
 
-  class Program
+  class Exercise
     include GABB::Commands
 
     ROOT_DIR = '../../'

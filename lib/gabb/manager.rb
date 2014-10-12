@@ -7,9 +7,9 @@ module GABB
 
     def initialize
       # setup_session
-      GABB::Session.new({name: 'boo'})
-      prepare_exercises
       puts "Greetings, WDI Student. Welcome to General Assembly Bug Buster!".blue
+      GABB::Session.new
+      prepare_exercises
       choice = nil
       while choice != '0'
         puts "Which exercise would you like to complete? (Enter the corresponding number)".blue
@@ -35,7 +35,7 @@ module GABB
     private
 
     def exercises
-      GABB::Program.descendants.map(&:to_s)
+      GABB::Exercise.descendants.map(&:to_s)
     end
 
     def prepare_exercises

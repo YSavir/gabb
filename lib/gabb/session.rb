@@ -3,7 +3,7 @@ module GABB
   class Session
 
     def initialize
-      add_session_directory if options[:new]
+      new_or_load
     end
 
     private
@@ -17,25 +17,25 @@ module GABB
     end
 
     def new_or_load
-      puts "Would you like to start a new session or load an old session?"
-      puts "  0: New"
-      puts "  1: Load"
-      choice = gets.strip.downcase
+      puts "Would you like to start a new session or load an old session?".blue
+      puts "  1: New".blue
+      puts "  2: Load".blue
+      choice = gets.strip
       case choice
-        when "new" then start_new_session
-        when "load" then load_session
+        when "1" then create_new_session
+        when "2" then load_session
       else
         puts "Not a valid choice."
         new_or_load
       end
     end
 
-    def start_new_session
-      p "Enter a name for the session: "
+    def create_new_session
+      print "Enter a name for the session: ".blue
       name = gets.chomp
-      if Dir.exists?(name)
-        puts "A session with that name already exists."
-        start_new_session
+      if Dir.exists?('./sessions/' + name)
+        puts "A session with that name already exists.".yellow
+        create_new_session
       else
         @name = name
         FileUtils.mkdir(directory_path)
@@ -43,8 +43,8 @@ module GABB
       end
     end
 
-    def log_program(program_name)
-      File.open(log_file, 'a') {|log| log.puts "Exercise: #{program_name}"}
+    def log_exercise(exercise_name)
+      File.open(log_file, 'a') {|log| log.puts "Exercise: #{exercise_name}"}
     end
 
   end
