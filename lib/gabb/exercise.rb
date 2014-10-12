@@ -22,6 +22,21 @@ module GABB
     def after_action
     end
 
+    def exposition
+    end
+
+    def rising_action
+    end
+
+    def climax
+    end
+
+    def falling_action
+    end
+
+    def resolution
+    end
+
     def action
       @session.prepare_exercise(self.class.to_s.underscore)
       exposition
