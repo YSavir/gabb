@@ -9,7 +9,7 @@ module GABB
     end
 
     def self.title
-      name || self.class
+      name || self.class.to_s.underscore
     end
 
     def name
@@ -17,21 +17,21 @@ module GABB
     end
 
     def action
+      @session.prepare_exercise(self.class.to_s.underscore)
       exposition
       wait
       begin
         rising_action
-        @session.require_exercise(self.class.underscore)
+        @session.require_exercise(self.class.to_s.underscore)
         wait
-      rescue error_type => error
+      rescue Exception => error
         @error = error
-        puts (error.to_s + "\n").colorize(:yellow)
+        puts "", (error.to_s + "\n").yellow
         climax
         wait
         retry
         falling_action
       else
-        FileUtils.cp('./templates/puts_hi.rb', './exercises')
         resolution
       end
     end

@@ -1,8 +1,16 @@
 module GABB
 
   class Session
-    private
 
+    def prepare_exercise(exercise_name)
+      FileUtils.cp("./lib/templates/#{exercise_name}.rb", directory_path)
+    end
+
+    def require_exercise(exercise_name)
+      require_relative("#{directory_path}/#{exercise_name}.rb")
+    end
+
+    private
 
     def initialize
       new_or_load
@@ -50,7 +58,7 @@ module GABB
         @exercises.each { |idx, exercise| puts "  #{idx}: #{exercise.name}".blue  if (idx.to_i > 0)}
         choice = gets.chomp
         case choice
-          when "0" then puts "Exiting General Assembly Buster!".blue
+          when "0" then puts "Exiting General Assembly Bug Buster!".blue
           when *@exercises.keys then @exercises[choice].new(self)
         else
           puts "Invalid choice. Please select a different options.".yellow
@@ -87,14 +95,6 @@ module GABB
       print "Briefly describe how you solved the problem: ".blue
       solution = gets.strip
       File.open(log_file, 'a') { |log| log.puts "Solution: ", solution } 
-    end
-
-    def add_exercise(exercise_name)
-      FileUtils.cp("./lib/exercises/#{exercise_name}", directory_path)
-    end
-
-    def require_exercise(exercise)
-      require_relative(directory_path + exercise)
     end
 
   end

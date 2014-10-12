@@ -14,20 +14,19 @@ class PutsHi < GABB::Exercise
   end
 
   def rising_action
-    
   end
 
-  def climax(error)
+  def climax
     find_details
     validate_details
     puts "Great. Go to that file and fix the issue.".blue
   end
 
   def falling_action
+    puts "Problem fixed!".blue
   end
 
   def resolution
-    puts "Problem fixed!".blue
   end
 
 end
