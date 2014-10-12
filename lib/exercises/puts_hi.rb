@@ -25,10 +25,6 @@ class PutsHi < GABB::Exercise
   end
 
   def resolution
-    File.open(log_file, 'a') do |f|
-      f.puts "Exercise: missing end"
-      f.puts "Error: " + error.to_s
-    end
     puts "Problem fixed!".blue
     puts "Can you give me a brief explanation of what you did?".blue
     File.open(log_file, 'a') do |f|

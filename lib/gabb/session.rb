@@ -47,6 +47,10 @@ module GABB
       File.open(log_file, 'a') {|log| log.puts "Exercise: #{exercise_name}"}
     end
 
+    def log_error(error_message)
+      File.open(log_file, 'a') {|log| log.puts "Error: #{error_message}"}
+    end
+
   end
 
 end
