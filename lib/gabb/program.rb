@@ -21,7 +21,6 @@ module GABB
       wait
       begin
         rising_action
-        binding.pry
         @session.require_exercise(self.class.underscore)
         wait
       rescue error_type => error
