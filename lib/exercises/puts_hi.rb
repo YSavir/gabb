@@ -1,6 +1,6 @@
 class PutsHi < GABB::Exercise
 
-  def self.name
+  def name
     "Puts Hi"
   end
 

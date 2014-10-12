@@ -5,15 +5,21 @@ module GABB
 
     def initialize(session)
       @session = session
+      before_action
       action
-    end
-
-    def self.title
-      name || self.class.to_s.underscore
+      after_action
     end
 
     def name
-      nil
+      self.class.to_s.underscore.split('_').map(&:capitalize).join(' ')
+    end
+
+    private
+    
+    def before_action
+    end
+
+    def after_action
     end
 
     def action
