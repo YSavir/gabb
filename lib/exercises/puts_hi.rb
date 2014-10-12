@@ -26,11 +26,6 @@ class PutsHi < GABB::Exercise
 
   def resolution
     puts "Problem fixed!".blue
-    puts "Can you give me a brief explanation of what you did?".blue
-    File.open(log_file, 'a') do |f|
-      f.puts "Solution: "
-      f.puts gets.chomp
-    end
     FileUtils.cp('./exercises/puts_hi.rb', ('./output/' + current_session_name))
     FileUtils.cp('./templates/puts_hi.rb', './exercises')
   end
