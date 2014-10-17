@@ -1,9 +1,12 @@
 module GABB
 
   class Session
+    attr_reader :name
 
-    def prepare_exercise(exercise_name)
-      FileUtils.cp("./lib/templates/#{exercise_name}.rb", directory_path)
+    def initialize
+      new_or_load
+      prepare_exercises
+      menu
     end
 
     def require_exercise(exercise_name)
@@ -12,23 +15,12 @@ module GABB
 
     private
 
-    def initialize
-      new_or_load
-      prepare_exercises
-      menu
-    end
-
-    def directory_path
-      Dir.pwd + '/sessions/' + @name
-    end
-
-    def log_file
-      directory_path + '/log.txt'
+    def prepare_exercise(exercise_name)
+      FileUtils.cp("./lib/templates/#{exercise_name}.rb", directory_path)
     end
 
     def greet
       puts "Greetings, WDI Student. Welcome to General Assembly Bug Buster!".blue
-      prepare_exercises
     end
 
     def new_or_load
@@ -81,20 +73,6 @@ module GABB
         FileUtils.mkdir(directory_path)
         FileUtils.touch(directory_path + '/log.txt')
       end
-    end
-
-    def log_exercise(exercise_name)
-      File.open(log_file, 'a') { |log| log.puts "Exercise: #{exercise_name}" }
-    end
-
-    def log_error(error_message)
-      File.open(log_file, 'a') { |log| log.puts "Error: #{error_message}" }
-    end
-
-    def get_and_log_solution(solution)
-      print "Briefly describe how you solved the problem: ".blue
-      solution = gets.strip
-      File.open(log_file, 'a') { |log| log.puts "Solution: ", solution } 
     end
 
   end
