@@ -12,7 +12,7 @@ module GABB
       while choice != '0'
         puts "Which exercise would you like to complete? (Enter the corresponding number)".blue
         puts "  0: Quit".blue
-        @exercises.each { |idx, exercise| puts "  #{idx}: #{exercise.name}".blue  if (idx.to_i > 0)}
+        @exercises.each { |idx, exercise| puts "  #{idx}: #{exercise.title}".blue  if (idx.to_i > 0)}
         choice = gets.chomp
         case choice
           when "0" then puts "Exiting General Assembly Bug Buster!".blue
@@ -24,17 +24,6 @@ module GABB
     end
 
     private
-
-    def require_exercise(directory_path, exercise_name)
-      require_relative("#{directory_path}/#{exercise_name}.rb")
-    end
-
-    private
-
-    def prepare_exercise(exercise_name)
-      FileUtils.cp("./lib/templates/#{exercise_name}.rb", directory_path)
-    end
-
 
     def exercises
       GABB::Exercise.descendants.map(&:to_s)
@@ -50,7 +39,6 @@ module GABB
     def directory_path
       Dir.pwd + '/sessions/' + @session_name
     end
-
 
   end
 

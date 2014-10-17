@@ -5,12 +5,9 @@ module GABB
 
     def initialize
       @exercises_manager = GABB::ExercisesManager.new
-      new_or_load
-      get_exercise
-    end
-
-    def greet
       puts "Greetings, WDI Student. Welcome to General Assembly Bug Buster!".blue
+      new_or_load
+      start_exercise
     end
 
     def new_or_load
@@ -27,7 +24,12 @@ module GABB
       end
     end
 
-    def get_exercise
+    def directory_path
+      Dir.pwd + '/sessions/' + @name
+    end
+
+
+    def start_exercise
       exercise = @exercises_manager.choose_exercise
       exercise.new(self)
     end
