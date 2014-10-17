@@ -6,11 +6,11 @@ module GABB
       @session_name = session_name
     end
 
-    def log_exercise(exercise_name)
+    def log_exercise_name(exercise_name)
       File.open(log_file, 'a') { |log| log.puts "Exercise: #{exercise_name}" }
     end
 
-    def log_error(error_message)
+    def log_error_message(error_message)
       File.open(log_file, 'a') { |log| log.puts "Error: #{error_message}" }
     end
 
