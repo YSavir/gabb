@@ -4,19 +4,9 @@ module GABB
     attr_reader :name
 
     def initialize
+      @exercises_manager = GABB::ExercisesManager.new
       new_or_load
-      prepare_exercises
-      menu
-    end
-
-    def require_exercise(exercise_name)
-      require_relative("#{directory_path}/#{exercise_name}.rb")
-    end
-
-    private
-
-    def prepare_exercise(exercise_name)
-      FileUtils.cp("./lib/templates/#{exercise_name}.rb", directory_path)
+      get_exercise
     end
 
     def greet
@@ -37,29 +27,9 @@ module GABB
       end
     end
 
-    def prepare_exercises
-      @exercises = Hash.new
-      exercises.each_with_index { |exercise, idx| @exercises[(idx + 1).to_s] = exercise.constantize}
-    end
-
-    def menu
-      choice = nil
-      while choice != '0'
-        puts "Which exercise would you like to complete? (Enter the corresponding number)".blue
-        puts "  0: Quit".blue
-        @exercises.each { |idx, exercise| puts "  #{idx}: #{exercise.name}".blue  if (idx.to_i > 0)}
-        choice = gets.chomp
-        case choice
-          when "0" then puts "Exiting General Assembly Bug Buster!".blue
-          when *@exercises.keys then @exercises[choice].new(self)
-        else
-          puts "Invalid choice. Please select a different options.".yellow
-        end
-      end
-    end
-
-    def exercises
-      GABB::Exercise.descendants.map(&:to_s)
+    def get_exercise
+      exercise = @exercises_manager.choose_exercise
+      exercise.new(self)
     end
 
     def create_new_session
