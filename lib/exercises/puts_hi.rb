@@ -1,9 +1,5 @@
 class PutsHi < GABB::Exercise
 
-  def name
-    "Puts Hi"
-  end
-
   def exposition
     puts "We're going to start by getting a method that prints 'hi' to the screen.".blue
     puts "The code for this method is found in another file. We'll have to require it before we can use the code.".blue

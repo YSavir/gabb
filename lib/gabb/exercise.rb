@@ -10,8 +10,8 @@ module GABB
       after_action
     end
 
-    def name
-      self.class.to_s.underscore.split('_').map(&:capitalize).join(' ')
+    def self.title
+      self.name.underscore.split('_').map(&:capitalize).join(' ')
     end
 
     private
