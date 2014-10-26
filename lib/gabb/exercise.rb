@@ -14,6 +14,10 @@ module GABB
       self.name.underscore.split('_').map(&:capitalize).join(' ')
     end
 
+    def file_name
+      self.class.name.underscore
+    end
+
     private
     
     def before_action
@@ -38,12 +42,12 @@ module GABB
     end
 
     def action
-      @session.prepare_exercise(self.class.to_s.underscore)
+      ExerciseUtils.new.prepare_exercise_for_session(self, @session)
       exposition
       wait
       begin
         rising_action
-        @session.require_exercise(self.class.to_s.underscore)
+        ExerciseUtils.new.require_exercise_for_session(self, @session)
         wait
       rescue Exception => error
         @error = error

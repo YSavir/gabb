@@ -36,10 +36,6 @@ module GABB
       @exercises = Hash[exercises_with_indexes]
     end
 
-    def directory_path
-      Dir.pwd + '/sessions/' + @session_name
-    end
-
   end
 
 end
