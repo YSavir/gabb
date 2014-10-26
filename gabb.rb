@@ -4,6 +4,7 @@ Bundler.require
 
 
 Dir["./lib/gabb/*.rb"].each {|file| require file }
+Dir["./lib/gabb/session/*.rb"].each {|file| require file }
 Dir["./lib/exercises/*.rb"].each {|file| require file }
 
-GABB::Session.new
+GABB::Program.new
