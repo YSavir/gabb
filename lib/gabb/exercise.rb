@@ -1,7 +1,7 @@
 module GABB
 
   class Exercise
-    include GABB::Commands
+    include GABB::ConsoleCommands
 
     def initialize(session)
       @session = session
