@@ -31,7 +31,7 @@ module GABB
       puts "  2: Load".blue
       choice = gets.strip
       case choice
-        when "1" then get_new_session_name
+        when "1" then create_new_session
         when "2" then load_session
       else
         puts "Not a valid choice.".yellow
@@ -39,19 +39,25 @@ module GABB
       end
     end
 
-    def get_new_session_name
-      print "Enter a name for the session: ".blue
+    def get_session_name
+      print "Enter session name: ".blue
       name = gets.chomp
+    end
+
+    def create_new_session
+      name = get_session_name
       if GABB::Session::Manager.session_exists?(name)
         puts "A session with that name already exists.".yellow
         get_new_session_name
       else
         GABB::Session::Manager.create_session(name)
-        GABB::Session::Base.new(name)
-        @name = name
-        
+        load_session(name)
       end
     end
 
+    def load_session(name=nil)
+      name ||= get_session_name
+      GABB::Session::Base.new(name)
+    end
   end
 end
