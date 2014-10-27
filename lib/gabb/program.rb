@@ -27,7 +27,7 @@ module GABB
 |  | |_ |   /  /_\  \   |   _  <  |   _  < 
 |  |__| |  /  _____  \  |  |_)  | |  |_)  |
  \______| /__/     \__\ |______/  |______/ 
-   General    Assembly     Bug     Buster
+             Bug           Buster
       title
     end
 
