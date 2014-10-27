@@ -4,7 +4,6 @@ module GABB
     include GABB::ConsoleCommands
 
     def initialize
-      @session_names = GABB::Session::Manager.session_names
       greet
     end
 
@@ -14,15 +13,22 @@ module GABB
       system('clear')
       line_break
       beat
-      puts "Greetings, WDI Student. Welcome to General Assembly Bug Buster!".blue
+      puts title.blue
+      line_break
       beat
       new_or_load
-      line_break
     end
 
-    def list_sessions
-      puts "Available sessions: "
-      puts @session_names
+    def title
+      <<-'title'
+  _______      ___      .______   .______  
+ /  _____|    /   \     |   _  \  |   _  \ 
+|  |  __     /  ^  \    |  |_)  | |  |_)  |
+|  | |_ |   /  /_\  \   |   _  <  |   _  < 
+|  |__| |  /  _____  \  |  |_)  | |  |_)  |
+ \______| /__/     \__\ |______/  |______/ 
+   General    Assembly     Bug     Buster
+      title
     end
 
    def new_or_load
@@ -45,19 +51,30 @@ module GABB
     end
 
     def create_new_session
-      name = get_session_name
-      if GABB::Session::Manager.session_exists?(name)
+      session_name = get_session_name
+      if GABB::Session::Manager.session_exists?(session_name)
         puts "A session with that name already exists.".yellow
-        get_new_session_name
+        create_new_session
       else
-        GABB::Session::Manager.create_session(name)
-        load_session(name)
+        GABB::Session::Manager.create_session(session_name)
+        enter_session(session_name)
       end
     end
 
-    def load_session(name=nil)
-      name ||= get_session_name
-      GABB::Session::Base.new(name)
+    def load_session
+      puts "Available sessions: "
+      puts GABB::Session::Manager.session_names.map {|name| "== " + name}
+      session_name = get_session_name
+      if GABB::Session::Manager.session_exists?(session_name)
+        enter_session(session_name)
+      else
+        puts "No session with that name."
+        load_session
+      end
+    end
+
+    def enter_session(session_name)
+      GABB::Session::Base.new(session_name)
     end
   end
 end
