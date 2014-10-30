@@ -34,10 +34,7 @@ module GABB
 
     def climax
     end
-
-    def falling_action
-    end
-
+    
     def resolution
     end
 
@@ -56,7 +53,6 @@ module GABB
         climax
         wait
         retry
-        falling_action
       else
         resolution
       end
