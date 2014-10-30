@@ -12,7 +12,7 @@ module GABB
       while choice != '0'
         puts "Which exercise would you like to complete? (Enter the corresponding number)".blue
         puts "  0: Quit".blue
-        @exercises.each { |idx, exercise| puts "  #{idx}: #{exercise.title}".blue  if (idx.to_i > 0)}
+        @exercises.each { |key, exercise| puts "  #{key}: #{exercise.title}".blue  if (key.to_i > 0)}
         choice = gets.chomp
         case choice
           when "0" then puts "Exiting GABB!".blue; return false
