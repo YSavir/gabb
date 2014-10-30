@@ -5,7 +5,8 @@ module GABB
     class Base
       attr_reader :name
 
-      def initialize
+      def initialize(name)
+        @name = name
         @exercises_manager = GABB::ExercisesManager.new
         start_exercise
       end
