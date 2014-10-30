@@ -8,14 +8,15 @@ module GABB
       def initialize(name)
         @name = name
         @exercises_manager = GABB::ExercisesManager.new
-        start_exercise
+        menu
       end
 
       private
 
-      def start_exercise
+      def menu
         exercise = @exercises_manager.choose_exercise
         exercise.new(self)
+        menu
       end
     end
   end
