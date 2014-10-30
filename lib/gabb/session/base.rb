@@ -15,8 +15,10 @@ module GABB
 
       def menu
         exercise = @exercises_manager.choose_exercise
-        exercise.new(self)
-        menu
+        if exercise
+          exercise.new(self)
+          menu
+        end
       end
     end
   end

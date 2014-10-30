@@ -15,7 +15,7 @@ module GABB
         @exercises.each { |idx, exercise| puts "  #{idx}: #{exercise.title}".blue  if (idx.to_i > 0)}
         choice = gets.chomp
         case choice
-          when "0" then puts "Exiting GABB!".blue
+          when "0" then puts "Exiting GABB!".blue; return false
           when *@exercises.keys then return @exercises[choice]
         else
           puts "Invalid choice. Please select a different options.".yellow
