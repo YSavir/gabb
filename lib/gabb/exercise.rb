@@ -34,17 +34,17 @@ module GABB
 
     def climax
     end
-    
+
     def resolution
     end
 
     def action
-      ExerciseUtils.new.prepare_exercise_for_session(self, @session)
+      ExerciseUtils.prepare_exercise_for_session(self, @session)
       exposition
       wait
       begin
         rising_action
-        ExerciseUtils.new.require_exercise_for_session(self, @session)
+        ExerciseUtils.require_exercise_for_session(self, @session)
         wait
       rescue Exception => error
         @error = error
