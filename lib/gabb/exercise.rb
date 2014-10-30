@@ -51,6 +51,7 @@ module GABB
         wait
       rescue Exception => error
         @error = error
+        find_details
         puts "", (error.to_s + "\n").yellow
         climax
         wait
