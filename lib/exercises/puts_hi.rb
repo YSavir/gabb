@@ -1,4 +1,4 @@
-class PutsHi < GABB::Exercise
+class PutsHi < GABB::Exercise::Base
 
   def exposition
     puts "We're going to start by getting a method that prints 'hi' to the screen.".blue

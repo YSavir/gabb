@@ -7,7 +7,7 @@ module GABB
 
       def initialize(name)
         @name = name
-        @exercises_manager = GABB::ExercisesManager.new
+        @exercises_manager = GABB::Exercise::Manager.new
         menu
       end
 
