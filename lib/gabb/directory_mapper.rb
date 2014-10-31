@@ -6,14 +6,8 @@ module GABB
       Dir.pwd + '/sessions'
     end
 
-    def initialize(options={})
-      @session = options[:session] || nil
+    def self.session_path_for(session)
+      Dir.pwd + '/sessions/' + session.name
     end
-
-    def session_path
-      Dir.pwd + '/sessions/' + @session.name
-    end
-
   end
-
 end
