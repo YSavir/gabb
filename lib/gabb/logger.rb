@@ -6,15 +6,21 @@ module GABB
     end
 
     def log_exercise_name(exercise)
-      write_to_log("Exercise: #{exercise.class.title}")
+      write_to_log do |log|
+        log.puts "Exercise: #{exercise.class.title}"
+      end
     end
 
     def log_error_message(error_message)
-      write_to_log("Error: #{error_message}")
+      write_to_log do |log|
+        log.puts "Error: #{error_message}"
+      end
     end
 
     def log_time
-      write_to_log(Time.now)
+      write_to_log do |log|
+        log.puts Time.now
+      end
     end
 
     def get_and_log_solution(solution)
@@ -27,11 +33,9 @@ module GABB
       DirectoryMapper.session_path_for(@session) + '/log.txt'
     end
 
-    def write_to_log(*items_to_log)
+    def write_to_log(&block)
       log = File.open(log_file, 'a')
-      items_to_log.each do |item|
-        log.puts item
-      end
+      yield(log)
       log.close
     end
 
