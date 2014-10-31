@@ -16,6 +16,7 @@ class PutsHi < GABB::Exercise::Base
 
   def resolution
     puts "Problem fixed!".blue
+    log_solution
   end
 
 end

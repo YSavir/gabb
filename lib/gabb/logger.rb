@@ -1,17 +1,20 @@
 module GABB
-
   class Logger
 
-    def initialize(session_name)
-      @session_name = session_name
+    def initialize(session)
+      @session = session
     end
 
-    def log_exercise_name(exercise_name)
-      File.open(log_file, 'a') { |log| log.puts "Exercise: #{exercise_name}" }
+    def log_exercise_name(exercise)
+      File.open(log_file, 'a') { |log| log.puts "Exercise: #{exercise.class.title}" }
     end
 
     def log_error_message(error_message)
       File.open(log_file, 'a') { |log| log.puts "Error: #{error_message}" }
+    end
+
+    def log_time
+      File.open(log_file, 'a') { |log| log.puts Time.now }
     end
 
     def get_and_log_solution(solution)
@@ -20,16 +23,8 @@ module GABB
       File.open(log_file, 'a') { |log| log.puts "Solution: ", solution } 
     end
 
-    private
-
     def log_file
-      directory_path + '/log.txt'
+      DirectoryMapper.session_path_for(@session) + '/log.txt'
     end
-
-    def directory_path
-      Dir.pwd + '/sessions/' + @session_name
-    end
-
   end
-
 end

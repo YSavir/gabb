@@ -95,6 +95,13 @@ module GABB
           guess_line
         end
       end
+
+      def log_solution
+        logger = GABB::Logger.new(@session)
+        logger.log_exercise_name(self)
+        logger.log_time
+        logger.get_and_log_solution(self)
+      end
     end
   end
 end
