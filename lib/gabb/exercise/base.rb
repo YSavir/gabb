@@ -7,9 +7,11 @@ module GABB
 
       def initialize(session)
         @session = session
+        @log = GABB::Logger.new(session)
         before_action
         action
         after_action
+        @log.close
       end
 
       def self.title
@@ -97,10 +99,8 @@ module GABB
       end
 
       def log_solution
-        logger = GABB::Logger.new(@session)
-        logger.log_exercise_name(self)
-        logger.log_time
-        logger.get_and_log_solution(self)
+        @log.log_exercise_name(self)
+        @log.get_and_log_solution(self)
       end
     end
   end
