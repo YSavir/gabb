@@ -10,6 +10,8 @@ class PutsHi < GABB::Exercise::Base
   end
 
   def climax
+    puts "Hmm.".blue
+    puts "Something went wrong. Let's figure out what.".blue
     validate_details
     puts "Great. Go to that file and fix the issue.".blue
   end
