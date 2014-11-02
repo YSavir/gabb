@@ -80,10 +80,6 @@ module GABB
         ObjectSpace.each_object(Class).select { |klass| klass < self }
       end
 
-      def error_type
-        Exception
-      end
-
       def log_solution
         @log.log_exercise_name(self)
         @log.get_and_log_solution(self)
