@@ -9,18 +9,18 @@ module GABB
 
       def initialize(session)
         @session = session
-        @details_are_validated = false
+        @detail_validator = GABB::DetailValidator.new(self)
         @log = GABB::Logger.new(session)
         action
         @log.close
       end
 
       def self.before_action(*methods)
-        @@before_action_methods = methods
+        @@before_action_methods += methods
       end
 
       def self.after_action(*methods)
-        @@after_action_methods = methods
+        @@after_action_methods += methods
       end
 
       def self.title
@@ -61,8 +61,7 @@ module GABB
           rising_action
           GABB::Exercise::Utils.require_exercise_for_session(self, @session)
         rescue Exception => error
-          @error = error
-          find_details
+          @detail_validator.find_details(error)
           puts "", (error.to_s + "\n").yellow
           climax
           wait
@@ -73,43 +72,16 @@ module GABB
         execute_after_action_methods
       end
 
+      def validate_details(options={})
+        @detail_validator.validate_details(options)
+      end
+
       def self.descendants
         ObjectSpace.each_object(Class).select { |klass| klass < self }
       end
 
       def error_type
         Exception
-      end
-
-      def find_details
-        @error_line = @error.to_s.match(/(\w+):(\d+)/)[2]
-        @error_file = @error.to_s.match(/(\w+.\w+):/)[1]
-      end
-
-      def validate_details(options={})
-        unless @details_are_validated
-          puts "Hmm.".blue
-          puts "Something went wrong. Let's figure out what.".blue
-          guess_file
-          guess_line
-          @details_are_validated = true unless options[:repeat]
-        end
-      end
-
-      def guess_file
-        puts "In what file is the error?".blue
-        unless gets.chomp == @error_file
-          puts("That's not the right file.".yellow)
-          guess_file
-        end
-      end
-
-      def guess_line
-        puts "On what line is the error?".blue
-        unless gets.chomp == @error_line
-          puts("That's not the right line.".yellow)
-          guess_line
-        end
       end
 
       def log_solution
