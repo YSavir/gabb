@@ -3,12 +3,16 @@ module GABB
   module Exercise
     class Manager
       attr_reader :exercises
+      include ConsoleCommands
 
       def initialize
         prepare_exercises
       end
 
       def choose_exercise
+        line_break
+        beat
+        beat
         choice = nil
         while choice != '0'
           puts "Which exercise would you like to complete? (Enter the corresponding number)".blue
