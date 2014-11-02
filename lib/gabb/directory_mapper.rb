@@ -1,6 +1,6 @@
 module GABB
 
-  class DirectoryMapper
+  module DirectoryMapper
 
     def self.sessions_path
       Dir.pwd + '/sessions'
