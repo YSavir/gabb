@@ -9,6 +9,7 @@ module GABB
 
       def initialize(session)
         @session = session
+        @details_are_validated = false
         @log = GABB::Logger.new(session)
         action
         @log.close
@@ -85,11 +86,14 @@ module GABB
         @error_file = @error.to_s.match(/(\w+.\w+):/)[1]
       end
 
-      def validate_details
-        puts "Hmm.".blue
-        puts "Something went wrong. Let's figure out what.".blue
-        guess_file
-        guess_line
+      def validate_details(options={})
+        unless @details_are_validated
+          puts "Hmm.".blue
+          puts "Something went wrong. Let's figure out what.".blue
+          guess_file
+          guess_line
+          @details_are_validated = true unless options[:repeat]
+        end
       end
 
       def guess_file
