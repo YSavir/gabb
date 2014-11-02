@@ -4,14 +4,22 @@ module GABB
 
     class Base
       include GABB::ConsoleCommands
+      @@before_action_methods = []
+      @@after_action_methods = []
 
       def initialize(session)
         @session = session
         @log = GABB::Logger.new(session)
-        before_action
         action
-        after_action
         @log.close
+      end
+
+      def self.before_action(*methods)
+        @@before_action_methods = methods
+      end
+
+      def self.after_action(*methods)
+        @@after_action_methods = methods
       end
 
       def self.title
@@ -23,12 +31,6 @@ module GABB
       end
 
       private
-      
-      def before_action
-      end
-
-      def after_action
-      end
 
       def exposition
       end
@@ -42,7 +44,16 @@ module GABB
       def resolution
       end
 
+      def execute_before_action_methods
+        @@before_action_methods.each { |method| self.send(method) }
+      end
+
+      def execute_after_action_methods
+        @@after_action_methods.each { |method| self.send(method) }
+      end
+
       def action
+        execute_before_action_methods
         GABB::Exercise::Utils.prepare_exercise_for_session(self, @session)
         exposition
         wait
@@ -60,6 +71,7 @@ module GABB
         else
           resolution
         end
+        execute_after_action_methods
       end
 
       def self.descendants
