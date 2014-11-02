@@ -38,7 +38,9 @@ module GABB
     def get_and_log_solution(solution)
       print "Briefly describe how you solved the problem: ".blue
       solution = gets.strip
-      File.open(log_file, 'a') { |log| log.puts "Solution: ", solution } 
+      File.open(log_file, 'a') { |log| log.puts "Solution: ", solution }
+      puts "Your notes have been to saved to the session's log. It may be found at:".blue
+      puts log_file 
     end
 
     def log_file
