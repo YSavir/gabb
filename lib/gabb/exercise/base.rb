@@ -56,11 +56,9 @@ module GABB
         execute_before_action_methods
         GABB::Exercise::Utils.prepare_exercise_for_session(self, @session)
         exposition
-        wait
         begin
           rising_action
           GABB::Exercise::Utils.require_exercise_for_session(self, @session)
-          wait
         rescue Exception => error
           @error = error
           find_details
