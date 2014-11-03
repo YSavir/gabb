@@ -2,7 +2,6 @@ module GABB
 
   module Exercise
     class Manager
-      attr_reader :exercises
       include ConsoleCommands
 
       def initialize
@@ -23,7 +22,7 @@ module GABB
             when "0" then puts "Exiting GABB!".blue; return false
             when *@exercises.keys then return @exercises[choice]
           else
-            puts "Invalid choice. Please select a different options.".yellow
+            puts "Invalid choice. Please select a different option.".yellow
           end
         end
       end
