@@ -1,5 +1,6 @@
 module GABB
   class Logger
+    include ConsoleCommands
 
     def initialize(session)
       @session = session
@@ -39,8 +40,11 @@ module GABB
       print "Briefly describe how you solved the problem: ".blue
       solution = gets.strip
       File.open(log_file, 'a') { |log| log.puts "Solution: ", solution }
+      beat
       puts "Your notes have been to saved to the session's log. It may be found at:".blue
-      puts log_file 
+      beat
+      puts log_file
+      beat
     end
 
     def log_file
