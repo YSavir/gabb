@@ -19,7 +19,8 @@ module GABB
 
     def validate_details(options={})
       unless @details_are_validated
-        details_to_validate = options[:only] ? options[:only].map{|detail| 'guess_' + detail.to_s } : validatable_details
+        details_to_validate = options[:only] ? convert_to_guess_methods(options[:only]) : validatable_details
+        binding.pry
         details_to_validate.each { |detail_method| self.send(detail_method) }
         @details_are_validated = true unless options[:repeat]
       end
@@ -45,6 +46,11 @@ module GABB
 
     def validatable_details
       [:guess_file, :guess_line]
+    end
+
+    def convert_to_guess_methods(details_list)
+      details_list = details_list & [:file, :line]
+      details_list.map { |detail| 'guess_' + detail.to_s }
     end
   end
 end
