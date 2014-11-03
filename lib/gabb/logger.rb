@@ -55,13 +55,10 @@ module GABB
       log_line_break
     end
 
-    private
-
     def write_to_log(&block)
       log = File.open(log_file, 'a')
       yield(log)
       log.close
     end
-
   end
 end
