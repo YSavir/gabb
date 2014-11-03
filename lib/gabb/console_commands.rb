@@ -8,7 +8,7 @@ module GABB
     end
 
     def line_break
-      puts "===================================="
+      puts "==========================================="
     end
 
     def beat
