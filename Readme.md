@@ -1,4 +1,4 @@
-#Gabb
+#GABB
 An interactive bug fixing activity for WDI Students
 ## Installation
 Clone the repo.
