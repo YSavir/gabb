@@ -27,6 +27,10 @@ module GABB
         self.name.underscore.split('_').map(&:capitalize).join(' ')
       end
 
+      def self.descendants
+        ObjectSpace.each_object(Class).select { |klass| klass < self }
+      end
+
       def file_name
         self.class.name.underscore
       end
@@ -54,30 +58,34 @@ module GABB
       end
 
       def action
+        clear_screen
         execute_before_action_methods
         GABB::Exercise::Utils.prepare_exercise_for_session(self, @session)
+        beat
         exposition
+        beat
         begin
           rising_action
+          beat
           GABB::Exercise::Utils.require_exercise_for_session(self, @session)
         rescue Exception => error
           @detail_validator.find_details(error)
-          puts "", (error.to_s + "\n").yellow
+          beat
+          puts (error.to_s + "\n").yellow
+          beat
           climax
+          beat
           wait
           retry
         else
           resolution
+          beat
         end
         execute_after_action_methods
       end
 
       def validate_details(options={})
         @detail_validator.validate_details(options)
-      end
-
-      def self.descendants
-        ObjectSpace.each_object(Class).select { |klass| klass < self }
       end
 
       def log_solution
