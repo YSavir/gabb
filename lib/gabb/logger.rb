@@ -36,7 +36,7 @@ module GABB
       end
     end
 
-    def get_and_log_solution(solution)
+    def get_and_log_solution
       print "Briefly describe how you solved the problem: ".blue
       solution = gets.strip
       File.open(log_file, 'a') { |log| log.puts "Solution: ", solution }

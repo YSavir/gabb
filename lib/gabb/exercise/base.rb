@@ -90,7 +90,7 @@ module GABB
 
       def log_solution
         @log.log_exercise_name(self)
-        @log.get_and_log_solution(self)
+        @log.get_and_log_solution
       end
     end
   end
