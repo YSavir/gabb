@@ -24,9 +24,7 @@ module GABB
       end
 
       def self.configure_detail_validator(&block)
-        binding.pry
         yield(@@detail_validator)
-        binding.pry
       end
 
       def self.title
