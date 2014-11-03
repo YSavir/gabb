@@ -17,12 +17,12 @@ Old sessions can be loaded... But functionality for loaded sessions has not yet 
 Creating an exercise is simple. Follow these steps:
 
 #### Create the template
-1. Create a template for the excersize in the lib/templates folder. The tempate's file name could, but is not required to be, a snake-cased version of the exercise's title.
+1. Create a template for the excersize in the `lib/templates` folder. The tempate's file name should, but is not required to be, a snake-cased version of the exercise's title.
     * Naming it in this way will allows GABB to intuitively find the file.
     * If it is named differently, the file name will have to be manually specified in the exercise.
 2. The file's code should have bugs.
 
-**Example:**
+**Example Template:**
 ```ruby
 # lib/templates/puts_hi.rb
 def puts_hi
@@ -31,7 +31,7 @@ def puts_hi
 ```
 
 #### Create the exercise
-1. Create a file for the exercise in the lib/exercises folder.
+1. Create a file for the exercise in the `lib/exercises` folder.
 2. Create a class for the exercise
     * The class name should be a constantized version of the exercise name.
     * The class needs to inherit from `GABB::Exercise::Base`
@@ -40,33 +40,33 @@ def puts_hi
     * There are 4 dialogue points available:
         1. Exposition<br>
           Dialogue to be displayed when starting an exercise.
-        2. Rising Action
-            * Dialogue to be displayed before the bugged file is loaded.
-        3. Climax
-            * Dialogue to be displayed after an error is raised.
-        4. Resolution
-            * Dialogue to be displayed after the file is cleared of bugs.
+        2. Rising Action<br>
+          Dialogue to be displayed before the bugged file is loaded.
+        3. Climax<br>
+          Dialogue to be displayed after an error is raised.
+        4. Resolution<br>
+          Dialogue to be displayed after the file is cleared of bugs.
     * If a dialogue method is not defined, no dialogue will be displayed.
     * The following methods are available when defining your dialogue methods:
-        * `beat`
-            * Outputs an empty line.
-        * `wait`
-            * Pauses until user presses enter.
-        * `line_break`
-            * Outputs "==========================================="
-        * `clear_screen`
-            * Clears the screen via `system(clear)`.
-        *  `validate_details`
-            * Will ask the user for the file's name and the line on which the error was encountered.
-            * Should only be used in the `climax` dialogue.
-        * `log_solution`
-            * Will prompt the user to explain how they solved the bug and log their explanation to the session's log file.
-            * Should only be used in the `resolution` dialogue.
+        * `beat`<br>
+          Outputs an empty line.
+        * `wait`<br>
+          Pauses until user presses enter.
+        * `line_break`<br>
+          Outputs "==========================================="
+        * `clear_screen`<br>
+          Clears the screen via `system(clear)`.
+        * `validate_details`<br>
+          Will ask the user for the file's name and the line on which the error was encountered, and does not proceed until they are correctly given.<br>
+          Should only be used in the `climax` dialogue.
+        * `log_solution`<br>
+          Will prompt the user to explain how they solved the bug and log their explanation to the session's log file.<br>
+          Should only be used in the `resolution` dialogue.
 
-That is all that is required to create an exercise. To customize an exercise, see the Customizing Exercises section.
+That is all that is required to create an exercise. GABB will automatically handle the rest. To customize an exercise, see the Customizing Exercises section.
 
 
-**Example:**
+**Example Exercise:**
 ```ruby
 # lib/exercises/puts_hi.rb
 class PutsHi < GABB::Exercise::Base
@@ -144,7 +144,7 @@ def climax
   puts "Great. Go to that file and fix the issue.".blue
 end
 ```
-`validate_details` will not repeat by default. It will only trigger once.
+`validate_details` only triggers once by default.
 
 #### Custom Validation Outputs
 Outputs for the `validate_details` method can be customized.
