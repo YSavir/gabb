@@ -6,10 +6,10 @@ module GABB
       include GABB::ConsoleCommands
       @@before_action_methods = []
       @@after_action_methods = []
+      @@detail_validator = GABB::DetailValidator.new(self)
 
       def initialize(session)
         @session = session
-        @detail_validator = GABB::DetailValidator.new(self)
         @log = GABB::Logger.new(session)
         action
         @log.close
@@ -21,6 +21,12 @@ module GABB
 
       def self.after_action(*methods)
         @@after_action_methods += methods
+      end
+
+      def self.configure_detail_validator(&block)
+        binding.pry
+        yield(@@detail_validator)
+        binding.pry
       end
 
       def self.title
@@ -69,7 +75,7 @@ module GABB
           beat
           GABB::Exercise::Utils.require_exercise_for_session(self, @session)
         rescue Exception => error
-          @detail_validator.find_details(error)
+          @@detail_validator.find_details(error)
           beat
           puts (error.to_s + "\n").yellow
           beat
@@ -85,7 +91,7 @@ module GABB
       end
 
       def validate_details(options={})
-        @detail_validator.validate_details(options)
+        @@detail_validator.validate_details(options)
       end
 
       def log_solution
