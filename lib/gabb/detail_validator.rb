@@ -20,14 +20,13 @@ module GABB
     def validate_details(options={})
       unless @details_are_validated
         details_to_validate = options[:only] ? options[:only].map{|detail| 'guess_' + detail.to_s } : validatable_details
-        binding.pry
         details_to_validate.each { |detail_method| self.send(detail_method) }
         @details_are_validated = true unless options[:repeat]
       end
     end
 
     def guess_file
-      puts @guess_file_prompt
+      print @guess_file_prompt + ' '
       unless gets.chomp == @error_file
         puts @incorrect_file
         guess_file
@@ -35,7 +34,7 @@ module GABB
     end
 
     def guess_line
-      puts @guess_line_prompt
+      print @guess_line_prompt + ' '
       unless gets.chomp == @error_line
         puts @incorrect_line
         guess_line
