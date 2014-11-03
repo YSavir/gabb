@@ -10,7 +10,7 @@ module GABB
     private
 
     def greet
-      system('clear')
+      clear_screen
       line_break
       beat
       puts title.blue
