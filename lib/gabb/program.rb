@@ -13,14 +13,14 @@ module GABB
       clear_screen
       line_break
       beat
-      puts title.blue
+      puts title_screen.blue
       line_break
       beat
       new_or_load
     end
 
-    def title
-      <<-'title'
+    def title_screen
+      <<-'title_screen'
   _______      ___      .______   .______  
  /  _____|    /   \     |   _  \  |   _  \ 
 |  |  __     /  ^  \    |  |_)  | |  |_)  |
@@ -28,7 +28,7 @@ module GABB
 |  |__| |  /  _____  \  |  |_)  | |  |_)  |
  \______| /__/     \__\ |______/  |______/ 
              Bug           Buster
-      title
+      title_screen
     end
 
    def new_or_load
