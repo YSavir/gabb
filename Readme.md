@@ -146,6 +146,18 @@ end
 ```
 `validate_details` only triggers once by default.
 
+#### Selective Detail Validation
+`validate_details` can be set to only validate certain details.
+```ruby
+def climax
+  puts "Hmm.".blue
+  puts "Something went wrong. Let's figure out what.".blue
+  validate_details(only: [:file])
+  puts "Great. Go to that file and fix the issue.".blue
+end
+```
+Possible options include `:file` and `:line`.
+
 #### Custom Validation Outputs
 Outputs for the `validate_details` method can be customized.
 ```ruby
