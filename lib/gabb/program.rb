@@ -66,6 +66,7 @@ module GABB
     def load_session
       puts "Available sessions: "
       puts GABB::Session::Manager.session_names.map {|name| "== " + name}
+      beat
       session_name = get_session_name
       if GABB::Session::Manager.session_exists?(session_name)
         enter_session(session_name)
