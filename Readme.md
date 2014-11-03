@@ -17,9 +17,9 @@ Old sessions can be loaded... But functionality for loaded sessions has not yet 
 Creating an exercise is simple. Follow these steps:
 
 #### Create the template
-1. Create a template for the excersize in the lib/templates folder. The tempate's file name could, but is not required to be, a snake-cased version of the exercise's name.
+1. Create a template for the excersize in the lib/templates folder. The tempate's file name could, but is not required to be, a snake-cased version of the exercise's title.
     * Naming it in this way will allows GABB to intuitively find the file.
-    * If it is named differently, the name will have to be manually specified in the exercise.
+    * If it is named differently, the file name will have to be manually specified in the exercise.
 2. The file's code should have bugs.
 
 **Example:**
@@ -36,6 +36,7 @@ def puts_hi
     * The class name should be a constantized version of the exercise name.
     * The class needs to inherit from `GABB::Exercise::Base`
 3. Give the excersize dialogue methods.
+    * The gem `colorize` is available to add color to the dialogue.
     * There are 4 dialogue points available:
         1. Exposition<br>
           Dialogue to be displayed when starting an exercise.
@@ -94,7 +95,69 @@ class PutsHi < GABB::Exercise::Base
   end
 end
 ```
+### Customizing an Exercise
 
+Exercises can be customized in the following ways:
+
+#### Exercise Title
+An exercise's title can be manually set.
+```ruby
+def self.title
+  "No End in Sight"
+end
+```
+Would normally default to the class name, eg "Puts Hi".
+
+#### Excersize Template Name
+An exercise's template name can be manually set.
+```ruby
+def file_name
+  the_puts_hi_exercise.rb
+end
+```
+Would normally default to the class name, eg "puts_hi.rb".
+
+#### Before and After Action Hooks
+You can add methods to be executed before and/or after an exercise executes.
+```ruby
+class PutsHi < GABB::Exercise::Base
+  before_action :greet
+  after_action :farewell
+
+  def greet
+    puts "Hi!"
+  end
+
+  def farewell
+    puts "Good bye!"
+  end
+end
+```
+
+#### Repeat Detail Validation
+`validate_details` can be set to repeat on each attempt at fixing the bug.
+```ruby
+def climax
+  puts "Hmm.".blue
+  puts "Something went wrong. Let's figure out what.".blue
+  validate_details(repeat: true)
+  puts "Great. Go to that file and fix the issue.".blue
+end
+```
+`validate_details` will not repeat by default. It will only trigger once.
+
+#### Custom Validation Outputs
+Outputs for the `validate_details` method can be customized.
+```ruby
+class PutsHi < GABB::Exercise::Base
+  configure_detail_validator do |validator|
+    validator.guess_file_prompt = "Yo. Guess the file" # defaults to "In what file is the error?".blue
+    validator.guess_line_prompt = "Can you find the error's line?" # defaults to "On what line is the error?".blue
+    validator.incorrect_file = "Nope, that ain\'t it." # defaults to "That's not the right file".yellow
+    validator.incorrect_line = "Wrong!" # defaults to "That's not the right line".yellow 
+  end
+end
+```
 
 
 ## To Do
