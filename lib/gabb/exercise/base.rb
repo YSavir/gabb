@@ -71,7 +71,7 @@ module GABB
         begin
           rising_action
           beat
-          GABB::Exercise::Utils.require_exercise_for_session(self, @session)
+          GABB::Exercise::Utils.load_exercise_for_session(self, @session)
         rescue Exception => error
           @@detail_validator.find_details(error)
           beat

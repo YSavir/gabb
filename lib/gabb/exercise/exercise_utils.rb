@@ -9,7 +9,7 @@ module GABB
         FileUtils.cp("./lib/templates/#{exercise.file_name}.rb", path)
       end
 
-      def self.require_exercise_for_session(exercise, session)
+      def self.load_exercise_for_session(exercise, session)
         path = DirectoryMapper.session_path_for(session)
         load("#{path}/#{exercise.file_name}.rb")
       end
