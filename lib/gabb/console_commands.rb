@@ -15,6 +15,10 @@ module GABB
       puts ""
     end
 
+    def clear_screen
+      system("clear")
+    end
+
   end
 
 end
