@@ -8,12 +8,12 @@ module GABB
       def initialize(name)
         @name = name
         @exercises_manager = GABB::Exercise::Manager.new
-        menu
+        get_and_run_exercise
       end
 
       private
 
-      def menu
+      def get_and_run_exercise
         exercise = @exercises_manager.choose_exercise
         if exercise
           exercise.new(self)
