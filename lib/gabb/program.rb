@@ -32,11 +32,13 @@ module GABB
     end
 
    def new_or_load
-      puts "Would you like to start a new session or load an old session?".blue
-      puts "  1: New".blue
-      puts "  2: Load".blue
+      puts "What would you like to do?".blue
+      puts "  0: Quit".blue
+      puts "  1: Start new session".blue
+      puts "  2: Load session".blue
       choice = gets.strip
       case choice
+        when "0" then puts "Exiting GABB!".blue; return false 
         when "1" then create_new_session
         when "2" then load_session
       else
