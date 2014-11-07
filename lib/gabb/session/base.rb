@@ -17,7 +17,7 @@ module GABB
         exercise = @exercises_manager.choose_exercise
         if exercise
           exercise.new(self)
-          menu
+          get_and_run_exercise
         end
       end
     end
