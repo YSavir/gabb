@@ -32,10 +32,12 @@ module GABB
     end
 
    def new_or_load
-      puts "What would you like to do?".blue
-      puts "  0: Quit".blue
-      puts "  1: Start new session".blue
-      puts "  2: Load session".blue
+      puts <<-'options'
+      What would you like to do?
+  0: Quit
+  1: Start new session
+  2: Load session
+  options
       choice = gets.strip
       case choice
         when "0" then puts "Exiting GABB!".blue; return false 
