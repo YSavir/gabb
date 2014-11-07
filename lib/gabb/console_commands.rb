@@ -18,7 +18,5 @@ module GABB
     def clear_screen
       system("clear")
     end
-
   end
-
 end
