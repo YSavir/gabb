@@ -20,7 +20,6 @@ module GABB
     def validate_details(options={})
       unless @details_are_validated
         details_to_validate = options[:only] ? convert_to_guess_methods(options[:only]) : validatable_details
-        binding.pry
         details_to_validate.each { |detail_method| self.send(detail_method) }
         @details_are_validated = true unless options[:repeat]
       end
