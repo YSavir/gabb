@@ -35,7 +35,7 @@ module GABB
         ObjectSpace.each_object(Class).select { |klass| klass < self }
       end
 
-      def file_name
+      def directory_name
         self.class.name.underscore
       end
 

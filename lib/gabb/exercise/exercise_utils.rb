@@ -5,14 +5,16 @@ module GABB
     module Utils
 
       def self.prepare_exercise_for_session(exercise, session)
-        path = DirectoryMapper.session_path_for(session)
-        FileUtils.cp("./lib/templates/#{exercise.file_name}.rb", path)
+        session_path = DirectoryMapper.session_path_for(session)
+        exercise_path = DirectoryMapper.exercise_path_for(exercise)
+        FileUtils.cp(exercise_path + "/template.rb", session_path + "/#{exercise.directory_name}.rb")
       end
 
       def self.load_exercise_for_session(exercise, session)
-        path = DirectoryMapper.session_path_for(session)
-        load("#{path}/#{exercise.file_name}.rb")
+        session_path = DirectoryMapper.session_path_for(session)
+        load("#{session_path}/#{exercise.directory_name}.rb")
       end
+
     end
   end
 end
