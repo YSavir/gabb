@@ -38,11 +38,24 @@ module GABB
     def get_and_log_solution
       print "Briefly describe how you solved the problem: ".blue
       solution = gets.strip
-      File.open(log_file, 'a') { |log| log.puts "Solution: ", solution }
+      write_to_log do |log|
+        log.puts "Solution: #{solution}"
+      end
       beat
       puts "Your notes have been to saved to the log. It may be found at:".blue
       beat
       puts log_file
+      beat
+    end
+
+    def get_and_log_problem
+      print "Describe the problem: ".blue
+      problem = gets.strip
+      write_to_log do |log|
+        log.puts ""
+        log.puts "Problem: #{problem}"
+        log.puts ""
+      end
       beat
     end
 

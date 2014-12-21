@@ -15,6 +15,7 @@ class PutsHi < GABB::Exercise::Base
     puts "Hmm.".blue
     puts "Something went wrong. Let's figure out what.".blue
     validate_details
+    log_problem
     puts "Great. Go to that file and fix the issue.".blue
   end
 

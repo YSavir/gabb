@@ -10,6 +10,7 @@ module GABB
 
       def initialize
         @log = GABB::Logger.new
+        @log.log_exercise_name(self)
         action
         @log.close
       end
@@ -92,9 +93,13 @@ module GABB
       end
 
       def log_solution
-        @log.log_exercise_name(self)
         @log.get_and_log_solution
       end
+
+      def log_problem
+        @log.get_and_log_problem
+      end
+
     end
   end
 end
