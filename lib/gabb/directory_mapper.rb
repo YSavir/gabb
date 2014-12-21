@@ -2,16 +2,24 @@ module GABB
 
   module DirectoryMapper
 
-    def self.sessions_path
-      Dir.pwd + '/sessions'
+    def self.scripts_path
+      File.expand_path './scripts'
     end
 
-    def self.session_path_for(session)
-      Dir.pwd + '/sessions/' + session.name
+    def self.script_path_for(exercise)
+      File.expand_path "./#{exercise.directory_name}.rb", scripts_path
     end
 
-    def self.exercise_path_for(exercise)
-      "./lib/exercises/" + exercise.directory_name
+    def self.exercises_path_for(exercise)
+      File.expand_path exercise.directory_name, "./lib/exercises/"
+    end
+
+    def self.template_path_for(exercise)
+      File.expand_path "./template.rb", exercises_path_for(exercise)
+    end
+
+    def self.log_path
+      File.expand_path "./log.txt"
     end
     
   end

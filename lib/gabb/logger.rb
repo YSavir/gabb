@@ -2,8 +2,7 @@ module GABB
   class Logger
     include ConsoleCommands
 
-    def initialize(session)
-      @session = session
+    def initialize
       log_line_break
       log_time
     end
@@ -41,14 +40,14 @@ module GABB
       solution = gets.strip
       File.open(log_file, 'a') { |log| log.puts "Solution: ", solution }
       beat
-      puts "Your notes have been to saved to the session's log. It may be found at:".blue
+      puts "Your notes have been to saved to the log. It may be found at:".blue
       beat
       puts log_file
       beat
     end
 
     def log_file
-      DirectoryMapper.session_path_for(@session) + '/log.txt'
+      DirectoryMapper.log_path
     end
 
     def close

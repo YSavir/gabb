@@ -8,9 +8,8 @@ module GABB
       @@after_action_methods = []
       @@detail_validator = GABB::DetailValidator.new(self)
 
-      def initialize(session)
-        @session = session
-        @log = GABB::Logger.new(session)
+      def initialize
+        @log = GABB::Logger.new
         action
         @log.close
       end
@@ -64,14 +63,14 @@ module GABB
       def action
         clear_screen
         execute_before_action_methods
-        GABB::Exercise::Utils.prepare_exercise_for_session(self, @session)
+        GABB::Exercise::Utils.prepare_exercise(self)
         beat
         exposition
         beat
         begin
           rising_action
           beat
-          GABB::Exercise::Utils.load_exercise_for_session(self, @session)
+          GABB::Exercise::Utils.load_exercise(self)
         rescue Exception => error
           @@detail_validator.find_details(error)
           beat

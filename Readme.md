@@ -6,13 +6,6 @@ Clone the repo.
 ### Starting
 Run `ruby gabb.rb` in the root folder, then follow instructions.
 
-### Sessions
-Whenever starting a bugfixing session, a folder is created in the `sessions` folder. This folder will include:
-* Any exercises a student works on in this session.
-* A log with completed exercises and the student's explanation of how s/he completed the exercise.
-
-Old sessions can be loaded... But functionality for loaded sessions has not yet been implemented.
-
 ### Creating an Exercise
 Creating an exercise is simple. Follow these steps:
 
@@ -60,7 +53,7 @@ def puts_hi
           Will ask the user for the file's name and the line on which the error was encountered, and does not proceed until they are correctly given.<br>
           Should only be used in the `climax` dialogue.
         * `log_solution`<br>
-          Will prompt the user to explain how they solved the bug and log their explanation to the session's log file.<br>
+          Will prompt the user to explain how they solved the bug and log their explanation to the log file.<br>
           Should only be used in the `resolution` dialogue.
 
 That is all that is required to create an exercise. GABB will automatically handle the rest. To customize an exercise, see the Customizing Exercises section.
