@@ -1,7 +1,14 @@
 source 'https://rubygems.org'
-gem 'pry'
-gem 'rspec'
-gem 'aruba'
-gem 'pry-bloodline'
+
+# Utilities
 gem 'colorize'
 gem 'activesupport', :require => 'active_support/inflector'
+
+# debugging
+gem 'pry'
+gem 'pry-bloodline'
+
+# testing
+gem 'rspec'
+gem 'aruba'
+gem 'activesupport'
