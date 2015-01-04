@@ -1,4 +1,3 @@
-require_relative '../spec_helper'
 require_relative '../../lib/gabb/directory_mapper'
 
 describe GABB::DirectoryMapper do
