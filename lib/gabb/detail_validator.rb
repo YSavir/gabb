@@ -8,8 +8,8 @@ module GABB
       @details_are_validated = false
       @guess_file_prompt =  "In what file is the error?".blue
       @guess_line_prompt = "On what line is the error?".blue
-      @incorrect_file = "That's not the right file.".yellow 
-      @incorrect_line = "That's not the right line.".yellow
+      @incorrect_file = "That's not the right file.".red 
+      @incorrect_line = "That's not the right line.".red
     end
 
     def find_details(error)

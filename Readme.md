@@ -158,8 +158,8 @@ class PutsHi < GABB::Exercise::Base
   configure_detail_validator do |validator|
     validator.guess_file_prompt = "Yo. Guess the file" # defaults to "In what file is the error?".blue
     validator.guess_line_prompt = "Can you find the error's line?" # defaults to "On what line is the error?".blue
-    validator.incorrect_file = "Nope, that ain\'t it." # defaults to "That's not the right file".yellow
-    validator.incorrect_line = "Wrong!" # defaults to "That's not the right line".yellow 
+    validator.incorrect_file = "Nope, that ain\'t it." # defaults to "That's not the right file".red
+    validator.incorrect_line = "Wrong!" # defaults to "That's not the right line".red 
   end
 end
 ```
