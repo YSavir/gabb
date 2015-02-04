@@ -72,16 +72,24 @@ module GABB
           rising_action
           beat
           GABB::Exercise::Utils.load_exercise(self)
+          run_specs
+        rescue TestingError => error
+          beat
+          puts (error.to_s + "\n").red
+          beat
+          climax
+          beat
+          wait
         rescue Exception => error
           @@detail_validator.find_details(error)
           beat
-          puts (error.to_s + "\n").yellow
+          puts (error.to_s + "\n").red
           beat
           climax
           beat
           wait
           retry
-        else
+        ensure
           resolution
           beat
         end
@@ -98,6 +106,16 @@ module GABB
 
       def log_problem
         @log.get_and_log_problem
+      end
+
+      def run_specs
+        temp_file = Tempfile.new('testing-output.txt')
+        spec_file = DirectoryMapper.spec_path_for(self)
+        spec_results = RSpec::Core::Runner.run([spec_file], temp_file, temp_file)
+        temp_file.close
+        temp_file.unlink
+        # if spec_results != 0 then raise TestingError end
+        raise TestingError if spec_results != 0
       end
 
     end
