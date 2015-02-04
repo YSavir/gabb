@@ -1,14 +1,14 @@
-class PutsHi < GABB::Exercise::Base
+class ReturnHi < GABB::Exercise::Base
 
   def exposition
-    puts "We're going to start by getting a method that prints 'hi' to the screen.".blue
+    puts "We're going to start by getting a method that returns 'Hi'.".blue
     beat
     puts "The code for this method is found in another file. We'll have to require it before we can use the code.".blue
     wait
   end
 
   def rising_action
-    puts "Requiring puts_hi.rb...".blue
+    puts "Requiring return_hi.rb...".blue
   end
 
   def climax
