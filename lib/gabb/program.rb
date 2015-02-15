@@ -37,7 +37,8 @@ module GABB
       @exercises_manager = GABB::Exercise::Manager.new
       exercise = @exercises_manager.choose_exercise
       if exercise
-        exercise.new
+        executor = GABB::Exercise::Executor.new(exercise.new)
+        executor.run_exercise
         get_and_run_exercise
       end
     end

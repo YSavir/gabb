@@ -3,17 +3,10 @@ module GABB
   module Exercise
 
     class Base
+      attr_reader :detail_validator_configuration
       include GABB::ConsoleCommands
       @@before_action_methods = []
       @@after_action_methods = []
-      @@detail_validator = GABB::DetailValidator.new(self)
-
-      def initialize
-        @log = GABB::Logger.new
-        @log.log_exercise_name(self)
-        action
-        @log.close
-      end
 
       def self.before_action(*methods)
         @@before_action_methods += methods
@@ -24,7 +17,7 @@ module GABB
       end
 
       def self.configure_detail_validator(&block)
-        yield(@@detail_validator)
+        @detail_validator_configuration = block
       end
 
       def self.title
@@ -39,74 +32,22 @@ module GABB
         self.class.name.underscore
       end
 
-      private
-
-      def exposition
+      def detail_validation_configuration
+        @@detail_validator_configuration ||= Proc.new {}
       end
 
-      def rising_action
+      def before_actions
+        @@before_action_methods
+      end
+      
+      def after_actions
+        @@after_action_methods
       end
 
-      def climax
-      end
-
-      def resolution
-      end
-
-      def execute_before_action_methods
-        @@before_action_methods.each { |method| self.send(method) }
-      end
-
-      def execute_after_action_methods
-        @@after_action_methods.each { |method| self.send(method) }
-      end
-
-      def action
-        clear_screen
-        execute_before_action_methods
-        GABB::Exercise::Utils.prepare_exercise(self)
-        beat
-        exposition
-        beat
-        begin
-          rising_action
-          beat
-          GABB::Exercise::Utils.load_exercise(self)
-          run_specs
-        rescue TestingError => error
-          beat
-          puts (error.to_s + "\n").red
-          beat
-          climax
-          beat
-          wait
-        rescue Exception => error
-          @@detail_validator.find_details(error)
-          beat
-          puts (error.to_s + "\n").red
-          beat
-          climax
-          beat
-          wait
-          retry
-        ensure
-          resolution
-          beat
-        end
-        execute_after_action_methods
-      end
-
-      def validate_details(options={})
-        @@detail_validator.validate_details(options)
-      end
-
-      def log_solution
-        @log.get_and_log_solution
-      end
-
-      def log_problem
-        @log.get_and_log_problem
-      end
+      def exposition; end
+      def rising_action; end
+      def climax; end
+      def resolution; end
 
       def run_specs
         temp_file = Tempfile.new('testing-output.txt')

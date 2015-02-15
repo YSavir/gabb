@@ -3,8 +3,7 @@ module GABB
   class DetailValidator
     attr_writer :guess_file_prompt, :guess_line_prompt, :incorrect_file, :incorrect_line
 
-    def initialize(exercise)
-      @exercise = exercise
+    def initialize
       @details_are_validated = false
       @guess_file_prompt =  "In what file is the error?".blue
       @guess_line_prompt = "On what line is the error?".blue
